@@ -16,6 +16,16 @@ load_config()
   rm -rf $CONFIG_REPO_NAME
 }
 
+check_docker_compose()
+{
+  if hash docker-compose 2>/dev/null; then
+    echo "docker-compose exists"
+  else
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  fi
+}
+
+check_docker_compose
 docker-compose down
 load_config
 docker-compose up -d --remove-orphans --force-recreate
