@@ -16,7 +16,10 @@ load_config()
   rm -rf $CONFIG_REPO_NAME
 }
 
-docker-compose down
+# docker-compose down
 load_config
-docker-compose up -d --remove-orphans --force-recreate
-docker-compose logs --tail=70 -f
+export $(cat .env | xargs)
+# docker-compose up -d --remove-orphans --force-recreate
+# docker-compose logs --tail=70 -f
+yarn install
+yarn start
